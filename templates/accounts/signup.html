@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1>Kayıt Ekranı</h1>
+                <br><br>
+                {{ form | crispy}}
+                <input class="btn btn-light" type="submit" value="Kayıt Ol">
+            </form>
+        </div>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row offset-4 mb-3">
+            <form class="form-inline" role="search" method="GET" action="/">
+                <i class="fas fa-search fa-2x mr-3" style="color: white;"></i>
+                <div class="input-group">
+                    <input class="form-control mr-sm-2" type="search" name="q" value="{{ request.GET.q }}" placeholder="Arama Yapın..." aria-label="Search"
+                    style="width: 325px;">
+                    <span class="input-group-btn">
+                        <input class="btn btn-light" type="submit" value="Ara">
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+        {% for content in contents %}
+        <div class="card h-75 bg-light" style="margin: 10px; float: left; width: 18.2%; padding: 5px;">
+          <img class="card-img-top" src="{{ content.image.url }}" alt="Card image cap"
+          style="width: 195px; height: 150px;">
+          <div class="card-body" style="height: 78px;">
+            <h5 class="card-title">{{ content.title }}</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-light">Kategori: {{ content.category }}</li>
+            <li class="list-group-item bg-light">Tarih: {{ content.publishing_date }}</li>
+          </ul>
+          <div class="card-body bg-light">
+            <a href="{{ content.get_absolute_url }}" class="card-link">
+                <button type="button" class="btn btn-outline-dark btn-light btn-sm">Hemen Yap</button></a>
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+<div class="container">
+    <div class="row">
+                <div class="pagination">
+                    <span class="step-links">
+                        <h5 class="mt-5">
+                            <span class="current text-white">
+                                Sayfa {{ contents.number }} / {{ contents.paginator.num_pages }}
+                            </span>
+                        {% if contents.has_previous %}
+                        <button type="button" class="btn btn-outline-secondary btn-sm bg-white">
+                            <a href="?page=1" class="text-secondary">&laquo; İlk</a>
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm bg-white">
+                            <a href="?page={{ contents.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="text-secondary">Önceki</a>
+                        </button>
+                        {% endif %}
+                        {% if contents.has_next %}
+                        <button type="button" class="btn btn-outline-secondary btn-sm bg-white">
+                            <a href="?page={{ contents.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="text-secondary">Sonraki</a>
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm bg-white">
+                            <a href="?page={{ contents.paginator.num_pages }}" class="text-secondary">Son &raquo;</a>
+                        </button>
+                        {% endif %}
+                            </h5>
+                    </span>
+                </div>
+    </div>
+</div>
+{% endblock %}

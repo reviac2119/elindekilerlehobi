@@ -1,0 +1,53 @@
+<header>
+    <nav class="navbar bg-color navbar-expand-sm navbar-dark fixed-top border-bottom border-white"
+    style="background-color: #17c267;">
+        <div class="container">
+            <a href = "{% url 'index' %}" class="navbar-brand">Elindekilerle Hobi</a>
+            <ul class="navbar-nav">
+                <li
+                    {% if request.path == '/' %}
+                        class="nav-item active"
+                    {% else %}
+                        class="nav-item"
+                    {% endif %}
+                >
+                    <a href = "{% url 'index' %}" class="nav-link active text-white">Anasayfa</a>
+                </li>
+
+                <li
+                    {% if 'about' in request.path %}
+                        class="nav-item active"
+                    {% else %}
+                        class="nav-item"
+                    {% endif %}
+                >
+                    <a href = "#" class="nav-link active text-white">Hakkımızda</a>
+                </li>
+                <li
+                    {% if 'contact' in request.path %}
+                        class="nav-item active"
+                    % else %}
+                        class="nav-item"
+                    {% endif %}
+                >
+                    <a href = "#" class="nav-link active text-white">İletişim</a>
+                </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if not request.user.is_authenticated %}
+                    <li>
+                        <a href = "{% url 'login' %}" class="nav-link active text-white">Giriş Yap</a>
+                    </li>
+                    <li>
+                        <a href = "{% url 'signup' %}" class="nav-link active text-white">Kayıt Ol</a>
+                    </li>
+                    {% else %}
+                    <a class="nav-link active text-white font-weight-bold">Merhaba,  {{ request.user.username }} </a>
+                    <li>
+                       <a href = "{% url 'logout' %}" class="nav-link active text-white">Çıkış Yap</a>
+                    </li>
+                    {% endif %}
+                </ul>
+        </div>
+    </nav>
+</header>

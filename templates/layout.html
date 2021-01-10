@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Elindekilerle Hobi</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">
+</head>
+
+<body class="bg-repeat" style="background-color: #00ff6e;">
+    {% include 'parts/_navbar.html' %}
+    <main style="padding-top: 5%; padding-bottom: 0.5%;">
+        {% include 'parts/_alert.html' %}
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% include 'parts/_footer.html' %}
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

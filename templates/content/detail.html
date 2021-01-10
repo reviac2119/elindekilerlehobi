@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+<div class="container">
+    <h1><i class="far fa-paper-plane fa-sm mr-3"></i>{{ content.title }}</h1>
+    <br>
+    <h4>Kategori: {{ content.category }}, <small>{{ content.publishing_date }}</small></h4>
+    <br><br>
+    <div class="row">
+        <div class="col-7">
+            <iframe width="640" height="360" src="https://www.youtube.com/embed/{{ content.link }}">
+            </iframe>
+        </div>
+        <div class="col-5">
+            <h3>Açıklama</h3>
+            <p class="text-justify">{{ content.explanation }}</p>
+            <h3>Malzemeler</h3>
+            <p class="text-justify">{{ content.ingredients }}</p>
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-6">
+        <hr>
+        <h3>Yorum Yap</h3>
+        <hr>
+        {% include 'content/comment.html' %}
+        <hr>
+    </div>
+    <div class="col-1">
+    </div>
+    <div class="col-5">
+        <hr>
+        <h3>Yorumlar</h3>
+        {% for comment in content.comments.all %}
+        <hr>
+        <h4>{{ comment.name }}: <small>{{ comment.created_date|timesince }} önce</small></h4>
+        <p>{{ comment.textComment|linebreaks }}</p>
+        {% endfor %}
+        <hr>
+    </div>
+    </div>
+</div>
+</body>
+{% endblock %}
+
+
+
+{{ content.id }}
+{{ content.title }}
+{{ content.category }}
+{{ content.ingredients }}
+{{ content.publishing_date }}
+{{ content.explanation }}
